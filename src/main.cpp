@@ -8,6 +8,8 @@
 #include "ipc/ipc.h"
 #include "ipc/file_locking.h"
 #include "ipc/queue.h"
+#include "ipc/semaphore.h"
+#include "ipc/shm.h"
 
 
 int GLOBAL = 5;
@@ -25,17 +27,6 @@ public:
 void func(int &var) {
     std::cout << "Var is "<< var << std::endl;
 }
-
-//void basic_threads()
-//{
-//    std::cout << "We can use this much concurrency " << std::thread::hardware_concurrency() << std::endl;
-//    int local = 5;
-//    Test test{};
-//    std::cout << "thread " << std::this_thread::get_id() << " main\n";
-//    ScopedThread st(std::thread (&Test::print_int, &test, std::ref(local)));
-//    std::cout << "Finishing up" << std::endl;
-//}
-
 void locks(std::mutex& mut)
 {
     std::lock_guard<std::mutex> guard(mut);
@@ -87,11 +78,16 @@ int main(int argc, char* argv[])
 //    fifo_write();
 //    reader_thread.join();
 
-    // Queue has a reader and a writer, launch the reader in a separate thread
-    std::thread reader_thread = std::thread(queue_receive);
-    queue_send();
-    reader_thread.join();
+//    // Queue has a reader and a writer, launch the reader in a separate thread
+//    queue_send();
+//    std::thread reader_thread = std::thread(queue_receive);
+//    reader_thread.join();
 
+    // Semaphores
+//    semaphone();
+
+    // Shared memory
+    shm_p1(argc, argv);
 
 
 
